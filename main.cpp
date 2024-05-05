@@ -15,6 +15,7 @@ static LSM6DSLSensor acc_gyro(&devI2c,0xD4,D4,D5); // high address
 static LIS3MDL magnetometer(&devI2c, 0x3C);
 static DigitalOut shutdown_pin(PC_6);
 static VL53L0X range(&devI2c, &shutdown_pin, PC_7, 0x52);
+UnbufferedSerial usb(USBTX, USBRX, 9600);
 
 
 // functions to print sensor data
@@ -60,6 +61,34 @@ void print_distance(){
 
 /* Simple main function */
 int main() {
+    char a = a;
+    char d = d;
+    char g = g;
+    char m = m;
+    char t = t;
+    char c;
+    printf("enter character: ");
+    scanf("%c", &c);
+    if(c == a){
+        usb.attach(&print_accel);
+    }
+    else if (c == d) {
+        usb.attach(&print_distance);
+    }
+    else if(c == g){
+        usb.attach(&print_gyro);
+    }
+    else if(c == m){
+        usb.attach(&print_mag);
+    }
+    else if(c == t){
+        usb.attach(&print_t_rh);
+    }
+    else{
+        printf("Invalid character\r\n");
+    }
+
+
     uint8_t id;
     float value1, value2;
 
