@@ -61,12 +61,12 @@ void print_distance(){
 
 /* Simple main function */
 int main() {
-    char a = a;
-    char d = d;
-    char g = g;
-    char m = m;
-    char t = t;
-    char c;
+    int a = 1;
+    int d = 2;
+    int g = 3;
+    int m = 4;
+    int t = 5;
+    int c;
 
     uint8_t id;
     float value1, value2;
@@ -109,25 +109,29 @@ int main() {
     printf("\r\n");
     
     while(1) {
-        printf("enter character: ");
-    scanf("%c", &c);
-    if(c == a){
+        printf("1: accel\r\n2: dist\r\n3: gyro\r\n4: mag\r\n5: temp+pres\r\n");
+        printf("enter number: \r\n");
+    scanf("%d", &c);
+    //printf("%d\r\n", c);
+    if(c == 1){
         usb.attach(&print_accel);
     }
-    else if (c == d) {
+    else if (c == 2) {
         usb.attach(&print_distance);
     }
-    else if(c == g){
+    else if(c == 3){
         usb.attach(&print_gyro);
     }
-    else if(c == m){
+    else if(c == 4){
         usb.attach(&print_mag);
     }
-    else if(c == t){
+    else if(c == 5){
         usb.attach(&print_t_rh);
     }
     else{
-        printf("Invalid character\r\n");
+        printf("Invalid choice. Restart program to try again.\r\n");
+        //kill loop in case of bad choice
+        return 0;
     }
         wait_us(500000);
     }
