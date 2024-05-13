@@ -7,6 +7,20 @@
 #include "lis3mdl_class.h"
 #include "VL53L0X.h"
 
+/*
+Error while trying ascii value of char for scan on repeated attempt
+++ MbedOS Error Info ++
+Error Status: 0x80010133 Code: 307 Module: 1
+Error Message: Mutex: 0x20000B88, Not allowed in ISR context
+Location: 0x80130A9
+Error Value: 0x20000B88
+Current Thread: main Id: 0x20002598 Entry: 0x80102C7 StackSize: 0x1000 StackMem: 0x20000D98 SP: 0x2009FE74 
+For more info, visit: https://mbed.com/s/error?error=0x80010133&tgt=B_L4S5I_IOT01A
+-- MbedOS Error Info --
+
+
+*/
+
 // objects for various sensors
 static DevI2C devI2c(PB_11,PB_10);
 static LPS22HBSensor press_temp(&devI2c);
@@ -61,12 +75,7 @@ void print_distance(){
 
 /* Simple main function */
 int main() {
-    int a = 1;
-    int d = 2;
-    int g = 3;
-    int m = 4;
-    int t = 5;
-    int c;
+    char c;
 
     uint8_t id;
     float value1, value2;
@@ -109,23 +118,23 @@ int main() {
     printf("\r\n");
     
     while(1) {
-        printf("1: accel\r\n2: dist\r\n3: gyro\r\n4: mag\r\n5: temp+pres\r\n");
-        printf("enter number: \r\n");
-    scanf("%d", &c);
+        printf("Choice menu\r\n1: accel\r\n2: dist\r\n3: gyro\r\n4: mag\r\n5: temp+pres\r\n");
+        printf("Enter valid number: \r\n");
+    scanf("%c", &c);
     //printf("%d\r\n", c);
-    if(c == 1){
+    if(c == 97){
         usb.attach(&print_accel);
     }
-    else if (c == 2) {
+    else if (c == 100) {
         usb.attach(&print_distance);
     }
-    else if(c == 3){
+    else if(c == 103){
         usb.attach(&print_gyro);
     }
-    else if(c == 4){
+    else if(c == 109){
         usb.attach(&print_mag);
     }
-    else if(c == 5){
+    else if(c == 116){
         usb.attach(&print_t_rh);
     }
     else{
