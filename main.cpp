@@ -67,27 +67,6 @@ int main() {
     char m = m;
     char t = t;
     char c;
-    printf("enter character: ");
-    scanf("%c", &c);
-    if(c == a){
-        usb.attach(&print_accel);
-    }
-    else if (c == d) {
-        usb.attach(&print_distance);
-    }
-    else if(c == g){
-        usb.attach(&print_gyro);
-    }
-    else if(c == m){
-        usb.attach(&print_mag);
-    }
-    else if(c == t){
-        usb.attach(&print_t_rh);
-    }
-    else{
-        printf("Invalid character\r\n");
-    }
-
 
     uint8_t id;
     float value1, value2;
@@ -130,6 +109,26 @@ int main() {
     printf("\r\n");
     
     while(1) {
+        printf("enter character: ");
+    scanf("%c", &c);
+    if(c == a){
+        usb.attach(&print_accel);
+    }
+    else if (c == d) {
+        usb.attach(&print_distance);
+    }
+    else if(c == g){
+        usb.attach(&print_gyro);
+    }
+    else if(c == m){
+        usb.attach(&print_mag);
+    }
+    else if(c == t){
+        usb.attach(&print_t_rh);
+    }
+    else{
+        printf("Invalid character\r\n");
+    }
         wait_us(500000);
     }
 }
